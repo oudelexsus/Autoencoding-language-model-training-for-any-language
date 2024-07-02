@@ -1,1 +1,3 @@
-# Autoencoding-language-model-training-for-any-language
+# Контекст
+
+Обучение модели BERT на данных отзывов о фильмах на сайте kinopoisk.ru
