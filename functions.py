@@ -1,11 +1,5 @@
-from transformers import DistilBertTokenizerFast
-from transformers import AutoTokenizer, AutoModel
-from sklearn.model_selection import train_test_split
 import torch
-import torch.nn as nn
-from torch.utils.data import Dataset,\
-                             DataLoader
-
+import re
 from sklearn.metrics import f1_score
 import time
 import pandas as pd
@@ -16,9 +10,22 @@ import warnings
 
 
 
+# Очистка текста cleaner
+# регуляризация l1 / l2
+# f1 метрика для батча
+# тренировочный цикл
+
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 warnings.filterwarnings("ignore")
 print('CUDA ?: ', torch.cuda.is_available())
+
+
+def cleaner(text_line):
+    clean_text = re.sub(r'[^a-zA-Zа-яА-ЯёЁ0-9\.\,\!\?\:\;\"\'\(\)\-\s]', '', text_line)
+    clean_text = re.sub(r'[\n\r\t\\]', '', clean_text)
+    clean_text = clean_text.strip()
+    return clean_text
 
 
 
